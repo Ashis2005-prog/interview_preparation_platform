@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Bell, Search, Moon, Sun, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { Menu } from "lucide-react";
+import { useSidebar } from "../context/SidebarContext";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import api from "../services/api";
@@ -14,6 +16,8 @@ const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifItems, setNotifItems] = useState([]);
   const [loadingNotifs, setLoadingNotifs] = useState(false);
+
+  const { toggleSidebar } = useSidebar();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -70,6 +74,13 @@ const Navbar = () => {
         transition-colors
       "
     >
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden p-2 mr-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
+        aria-label="Toggle menu"
+      >
+        <Menu size={24} className="text-gray-700 dark:text-gray-200" />
+      </button>
       {/* ================= LEFT - LOGO ================= */}
       <Link to="/dashboard" className="flex items-center gap-3 shrink-0">
         <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
