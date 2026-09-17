@@ -17,8 +17,11 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(",").map((origin) => origin.trim())
+// Checks both CLIENT_URL and FRONTEND_URL to prevent environment variable mismatch
+const clientUrlEnv = process.env.CLIENT_URL || process.env.FRONTEND_URL;
+
+const allowedOrigins = clientUrlEnv
+  ? clientUrlEnv.split(",").map((origin) => origin.trim().replace(/\/$/, ""))
   : ["http://localhost:5173", "http://localhost:3000"];
 
 app.use(
@@ -27,7 +30,10 @@ app.use(
       // Allow requests such as Postman/curl with no Origin header.
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes("*") || allowedOrigins.includes(origin)) {
+      // Normalize incoming origin by stripping trailing slash if any
+      const normalizedOrigin = origin.replace(/\/$/, "");
+
+      if (allowedOrigins.includes("*") || allowedOrigins.includes(normalizedOrigin)) {
         return callback(null, true);
       }
 
@@ -63,7 +69,6 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/evaluation", evaluationRoutes);
 app.use("/api/results", resultRoutes);
-
 
 // 404 handler
 app.use((req, res) => {
