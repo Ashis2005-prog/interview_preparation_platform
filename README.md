@@ -2,7 +2,7 @@
 
 Practice smarter, interview better.
 
-PrepAI is a full-stack web application that helps users prepare for technical interviews through AI-generated practice questions, mock AI interviews, and progress tracking — all in one place.
+PrepIQ is a full-stack web application that helps users prepare for technical interviews through AI-generated practice questions, mock AI interviews, and progress tracking — all in one place.
 
 ---
 
