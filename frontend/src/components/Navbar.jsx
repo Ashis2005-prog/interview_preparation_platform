@@ -163,7 +163,7 @@ const Navbar = () => {
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg z-50 overflow-hidden">
+              <div className="fixed left-4 right-4 top-20 sm:absolute sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:w-80 w-auto bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg z-50 overflow-hidden">
               <div className="px-4 py-3 border-b border-gray-100 dark:border-slate-700 font-semibold text-gray-800 dark:text-white">
                 Recent Activity
               </div>
